@@ -162,7 +162,7 @@ st.pyplot(plt)
 if 'user_type' not in day_df.columns:
     day_df['user_type'] = ['casual' if c >= r else 'registered' for c, r in zip(day['casual'], day['registered'])]
 
-usage_by_user_type = day_df.groupby('user_type')['cnt'].mean()
+usage_by_user_type = day_df.groupby('user_type')['count'].mean()
 
 # .Siapa yang lebih sering menggunakan layanan: pengguna terdaftar atau pengguna casual?
 plt.figure(figsize=(8, 6))
