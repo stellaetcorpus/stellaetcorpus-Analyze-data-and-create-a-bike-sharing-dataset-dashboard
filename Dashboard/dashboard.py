@@ -5,9 +5,8 @@ import streamlit as st
 
 sns.set(style='dark')
 
-day_df = pd.read_csv('./Dashboard/cleaned_day_data.csv')
-
-
+day_df = pd.read_csv('cleaned_day_data.csv')
+hour = pd.read_csv('hour.csv')
 day_df.head()
 
 day_df.rename(columns={
@@ -88,7 +87,7 @@ min_date = pd.to_datetime(day_df['dateday']).dt.date.min()
 max_date = pd.to_datetime(day_df['dateday']).dt.date.max()
 
 with st.sidebar:
-    st.image('Dashboard/images.png')
+    st.image('images.png')
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label='Rentang Waktu',
@@ -98,6 +97,9 @@ with st.sidebar:
     )
 main_df = day_df[(day_df['dateday'] >= str(start_date)) & 
                 (day_df['dateday'] <= str(end_date))]
+
+main_hr_df = hour[(hour['dteday'] >= str(start_date)) & 
+                (hour['dteday'] <= str(end_date))]
 
 # menyiapkan dataframe
 daily_rent_df = create_daily_rent_df(main_df)
@@ -131,45 +133,39 @@ with col3:
     st.metric('Total User', value= daily_rent_total)
 
 
+# 1. Visualisasi Penyewaan Berdasarkan Jam
+plt.figure(figsize=(12, 5))
+sns.lineplot(x=hour['hr'], y=hour['cnt'], marker="o", linewidth=2)
+plt.title("Jumlah Penyewaan Sepeda Berdasarkan Jam", fontsize=14)
+plt.xlabel("Jam dalam Sehari", fontsize=12)
+plt.ylabel("Jumlah Penyewaan", fontsize=12)
+plt.xticks(range(0, 24))
+st.pyplot(plt)
+
 # 2. Visualisasi Penyewaan Berdasarkan Hari
 plt.figure(figsize=(8, 5))
-sns.barplot(x=day_df['weekday'], y=day_df['count'], hue=day_df['weekday'], palette="viridis", legend=False)
+sns.barplot(x=main_df['weekday'], y=main_df['count'], hue=main_df['weekday'], palette="viridis", legend=False)
 plt.title("Jumlah Penyewaan Sepeda Berdasarkan Hari", fontsize=14)
 plt.xlabel("Hari dalam Seminggu (0=Minggu, 6=Sabtu)", fontsize=12)
 plt.ylabel("Jumlah Penyewaan", fontsize=12)
 plt.xticks(ticks=range(7), labels=['Min','Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'])
 st.pyplot(plt)
 
-# Membuat jumlah penyewaan bulanan
-st.subheader('Monthly Rentals')
-fig, ax = plt.subplots(figsize=(24, 8))
-ax.plot(
-    monthly_rent_df.index,
-    monthly_rent_df['count'],
-    marker='o', 
-    linewidth=2,
-    color='tab:blue'
-)
-
 # 3. Visualisasi Penyewaan Berdasarkan Bulan
 plt.figure(figsize=(10, 6))
-sns.barplot(x=day_df['month'], y=day_df['count'], palette="magma")
+sns.barplot(x=main_df['month'], y=main_df['count'], hue=main_df['month'], palette="magma", legend=False)
 plt.title("Jumlah Penyewaan Sepeda Berdasarkan Bulan", fontsize=14)
 plt.xlabel("Bulan", fontsize=12)
 plt.ylabel("Jumlah Penyewaan", fontsize=12)
 st.pyplot(plt)
 
-if 'user_type' not in day_df.columns:
-    day_df['user_type'] = ['casual' if c >= r else 'registered' for c, r in zip(day['casual'], day['registered'])]
+usage_by_season = main_df.groupby('season')['count'].mean()
 
-usage_by_user_type = day_df.groupby('user_type')['count'].mean()
-
-# .Siapa yang lebih sering menggunakan layanan: pengguna terdaftar atau pengguna casual?
 plt.figure(figsize=(8, 6))
-usage_by_user_type.plot(kind='bar', color=['lightblue', 'lightgreen'])
-plt.title('Perbandingan Penggunaan Layanan: Pengguna Terdaftar vs Casual')
+usage_by_season.plot(kind='bar', color='lightcoral')
+plt.title('Pengaruh Musim terhadap Jumlah Penyewaan Sepeda')
 plt.ylabel('Rata-rata Jumlah Sepeda yang Disewa')
-plt.xlabel('Tipe Pengguna')
+plt.xlabel('Musim')
 plt.xticks(rotation=0)
 plt.tight_layout()
 st.pyplot(plt)
