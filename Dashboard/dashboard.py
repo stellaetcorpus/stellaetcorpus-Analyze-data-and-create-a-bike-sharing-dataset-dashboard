@@ -5,7 +5,9 @@ import streamlit as st
 
 sns.set(style='dark')
 
-day_df = pd.read_csv('cleaned_day_data.csv')
+day_df = pd.read_csv('./Dashboard/cleaned_day_data.csv')
+
+
 day_df.head()
 
 day_df.rename(columns={
@@ -86,7 +88,7 @@ min_date = pd.to_datetime(day_df['dateday']).dt.date.min()
 max_date = pd.to_datetime(day_df['dateday']).dt.date.max()
 
 with st.sidebar:
-    st.image('images.png')
+    st.image('Dashboard/images.png')
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label='Rentang Waktu',
@@ -160,7 +162,7 @@ st.pyplot(plt)
 if 'user_type' not in day_df.columns:
     day_df['user_type'] = ['casual' if c >= r else 'registered' for c, r in zip(day['casual'], day['registered'])]
 
-usage_by_user_type = day_df.groupby('user_type')['cnt'].mean()
+usage_by_user_type = day_df.groupby('user_type')['count'].mean()
 
 # .Siapa yang lebih sering menggunakan layanan: pengguna terdaftar atau pengguna casual?
 plt.figure(figsize=(8, 6))
