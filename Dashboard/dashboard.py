@@ -86,6 +86,9 @@ def create_weather_rent_df(df):
 min_date = pd.to_datetime(day_df['dateday']).dt.date.min()
 max_date = pd.to_datetime(day_df['dateday']).dt.date.max()
 
+min_data_hour=pd.to_datetime(hour['dteday']).dt.date.min()
+max_data_hour=pd.to_datetime(hour['dteday']).dt.date.max()
+
 with st.sidebar:
     st.image('Dashboard/images.png')
     # Mengambil start_date & end_date dari date_input
