@@ -6,7 +6,7 @@ import streamlit as st
 sns.set(style='dark')
 
 day_df = pd.read_csv('Dashboard/cleaned_day_data.csv')
-hour = pd.read_csv('hour.csv')
+hour = pd.read_csv('Dashboard/hour.csv')
 day_df.head()
 
 day_df.rename(columns={
@@ -87,7 +87,7 @@ min_date = pd.to_datetime(day_df['dateday']).dt.date.min()
 max_date = pd.to_datetime(day_df['dateday']).dt.date.max()
 
 with st.sidebar:
-    st.image('images.png')
+    st.image('Dashboard/images.png')
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label='Rentang Waktu',
