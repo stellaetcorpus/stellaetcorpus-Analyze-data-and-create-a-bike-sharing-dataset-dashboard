@@ -138,12 +138,13 @@ with col3:
 
 # 1. Visualisasi Penyewaan Berdasarkan Jam
 plt.figure(figsize=(12, 5))
-sns.lineplot(x=hour['hr'], y=hour['cnt'], marker="o", linewidth=2)
+sns.lineplot(x=main_hr_df['hr'], y=main_hr_df['cnt'], marker="o", linewidth=2)
 plt.title("Jumlah Penyewaan Sepeda Berdasarkan Jam", fontsize=14)
 plt.xlabel("Jam dalam Sehari", fontsize=12)
 plt.ylabel("Jumlah Penyewaan", fontsize=12)
 plt.xticks(range(0, 24))
 st.pyplot(plt)
+
 
 # 2. Visualisasi Penyewaan Berdasarkan Hari
 plt.figure(figsize=(8, 5))
