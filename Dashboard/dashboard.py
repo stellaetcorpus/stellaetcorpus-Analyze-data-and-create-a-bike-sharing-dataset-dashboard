@@ -6,7 +6,7 @@ import streamlit as st
 sns.set(style='dark')
 
 day_df = pd.read_csv('Dashboard/cleaned_day_data.csv')
-')
+
 day_df.head()
 
 day_df.rename(columns={
