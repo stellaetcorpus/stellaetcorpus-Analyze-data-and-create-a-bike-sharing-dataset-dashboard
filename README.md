@@ -33,10 +33,10 @@ streamlit run dashboard.py
 ```
 Projek Akhir Analisis Data/
 │── Dashboard/
-│   ├── dashboard.py # Aplikasi utama menggunakan Streamlit
-│── data/            # Folder untuk dataset
-│── analisis.py         # Folder untuk skrip analisis
-│── README.md        # Dokumentasi proyek ini
+│   ├── dashboard.py                           # Aplikasi utama menggunakan Streamlit
+│── Bike Dataset/                              # Folder untuk dataset
+│── final_dari_Proyek_Analisis_Data (4).ipynb  # Folder untuk skrip analisis
+│── README.md                                  # Dokumentasi proyek ini
 ```
 
 🎯 Tujuan Proyek  
