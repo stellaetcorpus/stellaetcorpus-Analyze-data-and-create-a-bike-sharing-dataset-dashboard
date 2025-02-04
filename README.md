@@ -36,7 +36,9 @@ Projek Akhir Analisis Data/
 │   ├── dashboard.py                           # Aplikasi utama menggunakan Streamlit
 │── Bike Dataset/                              # Folder untuk dataset
 │── final_dari_Proyek_Analisis_Data (4).ipynb  # Folder untuk skrip analisis
-│── README.md                                  # Dokumentasi proyek ini
+│── requirements.txt                           #r equerement
+|── README.md                                  # Dokumentasi proyek ini
+|── url.txt                                    # url
 ```
 
 🎯 Tujuan Proyek  
