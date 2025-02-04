@@ -32,10 +32,11 @@ streamlit run dashboard.py
 📂 Struktur Proyek  
 ```
 Projek Akhir Analisis Data/
-│── dashboard.py   # Aplikasi utama menggunakan Streamlit
-│── data/          # Folder untuk dataset
-│── scripts/       # Folder untuk skrip analisis
-│── README.md      # Dokumentasi proyek ini
+│── Dashboard/
+│   ├── dashboard.py # Aplikasi utama menggunakan Streamlit
+│── data/            # Folder untuk dataset
+│── analisis.py         # Folder untuk skrip analisis
+│── README.md        # Dokumentasi proyek ini
 ```
 
 🎯 Tujuan Proyek  
